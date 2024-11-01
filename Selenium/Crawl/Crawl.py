@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-driver = webdriver.Chrome()
+driver = webdriver.Firefox()
 driver.get("https://www.wunderground.com/history/daily/tr/seyhan/LTAF/date/2017-12-28")
 
 driver.refresh()
