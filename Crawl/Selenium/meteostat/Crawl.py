@@ -41,8 +41,6 @@ def nextDay():
     nextdaydatetext = nextdaydate.strftime("%Y-%m-%d")
 
     driver.get(f"{url_base}{nextdaydatetext}/{nextdaydatetext}")
-    
-    print(f"Next Day {nextdaydatetext}")
 
     skipcookieSite()
 
@@ -76,8 +74,6 @@ def getTableData():
         windDir = re.findall("\d+",tablerow.find_element(By.CSS_SELECTOR,"i.wi-wind").get_attribute("class"))[0]
         
         data.append([date,temp,dewPoint,totalPrecipitation,condition,windSpeed,pressure,humidity,windDir])
-
-    print("Done Table Crawl")
 
 #main variables
 data = []
