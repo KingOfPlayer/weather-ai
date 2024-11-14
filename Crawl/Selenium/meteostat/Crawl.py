@@ -73,7 +73,9 @@ def getTableData():
         humidity = rowarray[7]
         windDir = re.findall("\d+",tablerow.find_element(By.CSS_SELECTOR,"i.wi-wind").get_attribute("class"))[0]
         
-        data.append([date,temp,dewPoint,totalPrecipitation,condition,windSpeed,pressure,humidity,windDir])
+        entry = [date,temp,dewPoint,totalPrecipitation,condition,windSpeed,pressure,humidity,windDir];
+
+        data.append(entry)
 
 #main variables
 data = []
@@ -87,18 +89,18 @@ driver.get("https://meteostat.net/en/station/LTBQ0?t=2024-11-01/2024-11-01")
 skipcookieSite()
 
 while True: 
-    m = input("Mode? :")
+    m = input("Mode? Quit(q), Reflesh(r), Next Day(n), Save(save), Get Table Data(get), Auto Get(autoget), :")
     if m == "q":
         break;
     if m == "r":
         driver.refresh()
     if m == "n":
         nextDay()
-    if m == "s":
+    if m == "save":
         saveDataset(driver.current_url.split('/',10)[-2].split('?')[0], data);
-    if m == "g":
+    if m == "get":
         getTableData()
-    if m == "auto":
+    if m == "autoget":
         c = int(input("How many? : "))
         print("------------- Auto crawl started -------------")
         for i in range(c):

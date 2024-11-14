@@ -100,18 +100,18 @@ driver.get(url)
 setupSite()
 
 while True: 
-    m = input("Mode? :")
+    m = input("Mode? Quit(q), Reflesh(r), Next Day(n), Save(save), Get Table Data(get), Auto Get(autoget), :")
     if m == "q":
         break;
     if m == "r":
         driver.refresh()
     if m == "n":
         nextDay()
-    if m == "s":
+    if m == "save":
         saveDataset(driver.current_url.split('/',10)[-3], data);
-    if m == "g":
+    if m == "get":
         getTableData()
-    if m == "auto":
+    if m == "autoget":
         c = int(input("How many? : "))
         print("------------- Auto crawl started -------------")
         for i in range(c):

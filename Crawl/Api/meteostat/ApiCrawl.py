@@ -29,11 +29,14 @@ def generateDayTable(year,mounth,day,dayCount):
     startdate = datetime(year,mounth,day);
 
     for x in range(0,dayCount,max_period):
-
+        if(startdate + timedelta(days=x+max_period-1)>lastestdate):
+            nextdate = lastestdate
+            dayTable.append([(startdate + timedelta(days=x)).strftime("%Y-%m-%d"),nextdate.strftime("%Y-%m-%d")])
+            break
         if(x+max_period>dayCount):
             nextdate = startdate + timedelta(days=dayCount)
         else:
-            nextdate = startdate + timedelta(days=x+max_period)
+            nextdate = startdate + timedelta(days=x+max_period-1)
 
         dayTable.append([(startdate + timedelta(days=x)).strftime("%Y-%m-%d"),nextdate.strftime("%Y-%m-%d")])
 
@@ -65,12 +68,12 @@ station = "LTBQ0"
 base_url = f"https://d.meteostat.net/app/proxy/stations/hourly?station={station}&tz=Europe/Istanbul"
 
 while True: 
-    m = input("Mode? :")
+    m = input("Mode? Quit(q), Save(save), Get(get), :")
     if m == "q":
         break;
-    if m == "s":
+    if m == "save":
         saveDataset(base_url.split("station=",1)[1].split("&",1)[0],data);
-    if m == "g":
+    if m == "get":
         year = int(input("Year?:"))
         month = int(input("Month?:"))
         day = int(input("Day?:"))
@@ -78,5 +81,6 @@ while True:
         dayTable = generateDayTable(year,month,day,count)
         print("------------- Crawl started -------------")
         getData(dayTable)
+        saveDataset(base_url.split("station=",1)[1].split("&",1)[0],data);
         print("------------- Crawl done -------------")
             
