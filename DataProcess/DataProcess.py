@@ -14,6 +14,7 @@ def saveSeasonalPlot(array, feature_name):
     result.plot()
     plt.subplot(4, 1, 1)
     plt.title(f"{feature_name}")
+    plt.gca().xaxis.set_major_locator(plt.MaxNLocator(5))
     plt.savefig(f"{feature_name}.png")
 
 # def saveSeasonalDataSet(array, feature_name): # (Not Work)
